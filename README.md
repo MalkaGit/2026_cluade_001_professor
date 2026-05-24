@@ -1,5 +1,12 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+# The Professor
+A learning project for practicing Claude Code, Next.js, GitHub workflow, testing, and Railway deployment.
+## Versions
+- `v1-hello-nextjs` — clean Hello Professor Next.js app
+- `v2-github-tags` — GitHub repository and tag workflow
+
 ## Getting Started
 
 First, run the development server:
