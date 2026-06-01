@@ -29,6 +29,26 @@ The goal is not only to write working code, but also to:
 
 ---
 
+## GitHub MCP Workflow
+	GitHub MCP is used to help Claude work with GitHub issues and pull requests.
+	Rules:
+		- Claude may draft issues and PR descriptions.
+    - Claude may suggest branch names and commit messages.
+    - Claude may inspect GitHub context when available.
+    - Claude must not merge PRs without user approval.
+    - Claude must not commit or expose secrets.
+    - User approves all write actions.
+    - Professional workflow:
+           → issue
+          → branch
+          → implementation
+          → tests
+          → review
+          → PR
+          → merge
+          → deploy
+
+---
 ## Architecture Principles
 
 Use Next.js App Router best practices.
