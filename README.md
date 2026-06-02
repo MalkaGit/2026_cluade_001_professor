@@ -36,6 +36,16 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+
+## Deployment
+	deploys the Hello Professor app to Railway.
+	Deployment flow:
+		1. Push changes to GitHub.
+        2. Railway deploys from the GitHub repository.
+        3. Verify the Railway URL on desktop, iPhone, and iPad.
+		Current version tag:`v5-railway-hello`
+
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
