@@ -1,9 +1,5 @@
-import Image from "next/image";
+import ProfessorGame from "@/components/professor/ProfessorGame";
 
 export default function Home() {
-  return (
-<div>
-Hello Professor!
-</div>
-);
+  return <ProfessorGame />;
 }
