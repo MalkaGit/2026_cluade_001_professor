@@ -1,5 +1,23 @@
 # Project Instructions
 
+<!-- HOW TO DISABLE WORKFLOW ENFORCEMENT
+
+The "Workflow Enforcement" section below forces Claude to use slash commands
+(/plan-feature, /create-feature, /review, etc.) before each step.
+
+To DISABLE enforcement temporarily — wrap the section in an HTML comment:
+
+    <!-- ENFORCEMENT DISABLED
+    ## Workflow Enforcement
+    ...
+    - ->
+
+To RE-ENABLE — remove the comment markers.
+
+Claude will not apply any rules that are inside HTML comments.
+-->
+
+
 ## Project Goal
 
 This repository contains application code 
@@ -89,6 +107,68 @@ src/
 * Use shared types when multiple files depend on them.
 * Prefer readability over abstraction.
 * Avoid creating architecture that is not yet needed.     
+
+---
+
+## Workflow Enforcement
+
+Claude must enforce the full professional workflow for every feature.
+
+### Rules
+
+**Step 1 — Plan**
+- Never begin implementing without a completed `/plan-feature` output
+- Never begin implementing without explicit user approval of the plan
+- If the user asks to implement without a plan: stop, remind them to type `/plan-feature` first
+- If the plan was written informally (plain text): stop, ask the user to run `/plan-feature` properly
+
+**Step 2 — Implement**
+- Never write feature code without using `/create-feature`
+- If the user says "implement it" or "write the code" without `/create-feature`: stop, remind them to type `/create-feature`
+
+**Step 3 — Tests**
+- Never skip tests without explicit user decision
+- After implementation, remind the user to run `/add-tests`
+- If the user skips tests: acknowledge it and note what is untested
+
+**Step 4 — Run Tests**
+- After adding tests, remind the user to run the relevant test commands
+- Examples: `npm run lint`, `npm run test`, `npm run test:e2e`
+- If tests fail: stop, do not proceed to review until tests pass
+
+**Step 5 — Fix Bugs**
+- If bugs are found during testing: use `/fix-bug`
+- If the user asks to fix a bug informally: remind them to use `/fix-bug` for proper root cause explanation and safe fix
+
+**Step 6 — Review**
+- Never prepare a PR without a `/review` first
+- If the user asks to create a PR without reviewing: stop, remind them to run `/review` first
+
+**Step 7 — Regression Tests**
+- After review, remind the user to run regression tests if the feature touches existing behavior
+- If skipped: acknowledge it and note the risk
+
+**Step 8 — Manual Verification**
+- Remind the user to manually verify the feature before creating a PR
+- Must cover: user experience, visual validation, responsive behavior, edge cases
+
+**Step 9 — PR**
+- Never create a PR without completed review and manual verification
+- Never merge without explicit user approval
+
+### Summary Table
+
+| Step         | Command / Action    | Enforcement                               |
+|--------------|-----------------    |-------------------------------------------|
+| Plan         | `/plan-feature`     | Hard stop — no code without approved plan |
+| Implement    | `/create-feature`   | Hard stop — no code without this command  |
+| Tests        | `/add-tests`        | Remind — user must consciously skip       |
+| Run Tests    | `npm run test` etc. | Remind — stop if tests fail               |
+| Fix Bugs     | `/fix-bug`          | Remind — use for all bug fixes            |
+| Review       | `/review`           | Hard stop — no PR without review          |
+| Regression   | run test suite      | Remind — note risk if skipped             |
+| Manual verification | user action  | Remind — required before PR               |
+| PR           | user approval        | Hard stop — no merge without approval    |
 
 ---
 
