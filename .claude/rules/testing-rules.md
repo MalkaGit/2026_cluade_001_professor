@@ -8,6 +8,30 @@ Follow:
 * approved feature plan
 * approved test strategy
 
+
+## Project Policy
+
+* Always define manual sanity tests in the feature plan.
+* Alway add at least minimal Playwright tests
+* Do not add heavy testing infrastructure unless the value is clear.
+
+For early project stages:
+
+* prefer simple testing approaches
+* prefer readability over advanced patterns
+* avoid overengineering the test setup
+
+
+For small learning features:
+
+* Prefer unit tests for framework-independent business logic.
+* If automated tests are skipped, document:
+  * what was tested manually
+  * what remains unprotected
+
+
+
+
 ## Testing Philosophy
 
 Test behavior.
@@ -75,6 +99,13 @@ Prefer Playwright for E2E tests.
 Test from the user's perspective.
 
 Avoid testing implementation details.
+<!-- 
+Do not introduce Playwright unless:
+
+* the feature explicitly requires E2E coverage
+* the feature plan approves it -->
+
+
 
 ## Unit Tests
 
@@ -94,6 +125,13 @@ Unit tests should:
 * be deterministic
 * avoid external dependencies when practical
 
+Prefer unit tests for:
+
+* framework-independent business logic
+* utility functions
+* state transformations
+
+
 ## Integration Tests
 
 Use when multiple parts must work together.
@@ -107,6 +145,9 @@ Examples:
 
 Prefer integration tests over excessive mocking.
 
+Avoid unnecessary integration tests in early learning stages.
+
+
 ## Component Tests
 
 Use only when they provide clear value.
@@ -119,6 +160,8 @@ Examples:
 * error states
 
 Avoid testing trivial rendering.
+
+Avoid snapshot-heavy testing without clear value.
 
 ## Regression Tests
 
@@ -157,6 +200,9 @@ Avoid testing:
 * trivial getters/setters
 * generated code
 
+Avoid tests that provide little protection value.
+
+
 ## Mocking
 
 Prefer:
@@ -168,6 +214,9 @@ Use mocks only when necessary.
 Avoid excessive mocking.
 
 Do not mock everything by default.
+
+Prefer lightweight mocks over deeply coupled mocks.
+
 
 ## Coverage
 
@@ -201,6 +250,13 @@ Verify:
 * tests are maintainable
 * tests pass locally
 
+If tests are skipped:
+
+* document the reason
+* document manual verification performed
+* document remaining risks
+
+
 ## Review Guidelines
 
 When reviewing tests, ask:
@@ -210,3 +266,8 @@ When reviewing tests, ask:
 * Would the test fail if the behavior broke?
 * Is the test overly coupled to implementation details?
 * Is there a simpler way to test this?
+# Important Principle
+
+Meaningful tests are better than many tests.
+
+Readable tests are better than clever tests.
