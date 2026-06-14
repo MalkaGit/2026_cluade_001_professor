@@ -172,17 +172,17 @@ export function createInitialState(): GameState {
 
 // ─── State transitions ─────────────────────────────────────────────────────────
 
+/** Returns to playing with the same question and cleared input. Attempts count is preserved. */
+export function retryQuestion(state: GameState): GameState {
+  return { ...state, phase: 'playing', currentInput: '' };
+}
+
 /**
  * Advances to the next question, or ends the game if all questions are done.
  *
  * Called from ProfessorGame.tsx via useEffect timer after 'correct' and 'wrong_final' phases.
  * This is a pure function — the timer itself lives in the React component.
  */
-/** Returns to playing with the same question and cleared input. Attempts count is preserved. */
-export function retryQuestion(state: GameState): GameState {
-  return { ...state, phase: 'playing', currentInput: '' };
-}
-
 export function advanceQuestion(state: GameState): GameState {
   const nextIndex = state.currentIndex + 1;
   if (nextIndex >= QUESTIONS_PER_GAME) {
@@ -206,7 +206,7 @@ export function advanceQuestion(state: GameState): GameState {
  * Key strings match button labels in ProfessorKeyboard.tsx:
  *   digits:    '0'–'9'
  *   operators: '+', '-', '×', '÷'
- *   special:   'GO', 'SET', 'ON/OFF', 'LVL1'–'LVL5', '.'
+ *   special:   'GO', 'DEL', 'ON/OFF', 'LVL1'–'LVL5'
  */
 export function handleKeyPress(state: GameState, key: string): GameState {
 

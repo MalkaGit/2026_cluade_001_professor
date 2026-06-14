@@ -1,115 +1,388 @@
+<!-- 4f -->
 # Review
 
 Review the current implementation like a senior engineer.
 
-## Goal
+This review happens before:
 
-Verify that the feature:
+* final verification
+* PR preparation
 
-* satisfies the approved plan
-* satisfies the user stories
-* satisfies the acceptance criteria
-* is maintainable
-* is properly tested
-* follows project conventions
+Do NOT use for:
 
-This review happens before creating a PR.
+* trivial low-risk tweaks already clearly safe
+* style-only reviews
+* speculative architecture brainstorming
 
-## Instructions
+---
 
-Review the implementation against:
+# Goal
+
+Review the implementation quality and identify meaningful risks before PR.
+
+Focus on:
+
+* correctness
+* maintainability
+* readability
+* regression risks
+* acceptance criteria coverage
+* practical engineering quality
+* proportional architecture
+* delivery safety
+
+The review MUST remain proportional to:
+
+* feature complexity
+* business impact
+* regression risk
+* operational/runtime impact
+* project scale
+
+Prefer practical confidence over theoretical purity.
+
+Avoid unnecessary redesign discussions.
+
+Avoid architecture perfectionism.
+
+---
+
+# Inputs
+
+Review against:
 
 * approved feature plan
-* user stories
+* current implementation
 * acceptance criteria
-* test strategy
-* project conventions in `CLAUDE.md`
+* current testing truth
+* `.claude/CLAUDE.md`
 
-Identify:
+If relevant, also consider:
 
-1. Blocking issues
-2. Security concerns
-3. Risk areas
-4. Architecture concerns
-5. Maintainability concerns
-6. Performance concerns
-7. Missing tests
-8. Non-blocking improvements
+* runtime/deployment behavior
+* integration behavior
+* operational concerns
 
-Do not suggest unnecessary architecture.
+---
 
-Do not suggest large refactors unless clearly justified.
+# Review Complexity
 
-Keep recommendations aligned with the current project stage.
+Classify feature complexity BEFORE reviewing.
 
-## Review Checklist
+Review depth and output verbosity MUST scale according to:
 
-### Feature Validation
+* feature complexity
+* business impact
+* regression risk
+* operational/runtime impact
+* user impact
+
+---
+
+## Tiny Feature
+
+Examples:
+
+* CSS tweak
+* text change
+* tiny validation
+* isolated UI adjustment
+* tiny bug fix
+
+Expected behavior:
+
+* concise review
+* correctness validation
+* lightweight maintainability review
+* minimal architecture discussion
+
+Avoid:
+
+* speculative architecture feedback
+* giant review reports
+* unnecessary optimization discussion
+* over-analysis
+
+Prefer:
+
+* correctness
+* readability
+* scope validation
+* practical maintainability
+
+Tiny features do NOT require enterprise-level review rigor.
+
+---
+
+## Medium Feature
+
+Examples:
+
+* CRUD workflow
+* API integration
+* reusable logic
+* frontend/backend workflow
+* stateful UI behavior
+
+Expected behavior:
+
+* balanced review depth
+* maintainability feedback
+* regression awareness
+* architecture consistency review
+* testing assessment
+
+---
+
+## Large / High-Risk Feature
+
+Examples:
+
+* authentication
+* payments
+* migrations
+* persistence-heavy features
+* distributed systems
+* runtime-sensitive behavior
+
+Expected behavior:
+
+* broader system awareness
+* stronger regression analysis
+* operational/runtime awareness
+* security/performance considerations
+* rollout/deployment awareness
+
+Still avoid speculative perfectionism.
+
+---
+
+# Core Review Rules
+
+1. Follow `.claude/CLAUDE.md`
+2. Review implementation against approved scope
+3. Classify review complexity
+4. Prioritize correctness and regression risk
+5. Prefer practical maintainability feedback
+6. Keep recommendations proportional to project size
+7. Reuse existing project patterns as baseline
+8. Distinguish blocking vs non-blocking findings
+9. Avoid unrelated redesign suggestions
+10. Prefer practical engineering over theoretical purity
+
+Prefer preserving delivery momentum unless risk clearly justifies interruption.
+
+Prefer consistency with existing project patterns over theoretically cleaner alternatives.
+
+Do NOT escalate low-impact maintainability concerns into blocking issues.
+
+Do NOT recommend rewriting stable working code without strong justification.
+
+---
+
+# Existing Project Patterns
+
+Strongly prefer preserving EXISTING:
+
+* folder structure
+* architecture
+* naming conventions
+* testing patterns
+* runtime patterns
+
+Avoid introducing alternative architecture directions unless clearly justified.
+
+Team consistency is more important than personal preference.
+
+---
+
+# Stop Conditions
+
+Stop and ask when:
+
+* requirements are unclear
+* acceptance criteria conflict
+* intended behavior is ambiguous
+* architecture direction is unclear
+* implementation scope unexpectedly expanded
+* runtime/deployment assumptions are unclear
+* findings depend on unknown business rules
+
+Do NOT invent product assumptions.
+
+---
+
+# Review Principles
+
+Prefer:
+
+* focused practical review
+* correctness
+* maintainability
+* readability
+* regression awareness
+* incremental improvement
+* proportional feedback
+* high-signal findings
+
+Avoid:
+
+* architecture perfectionism
+* speculative redesign
+* nitpick overload
+* unnecessary framework discussions
+* “rewrite everything” feedback
+* review bureaucracy
+
+Prefer meaningful risks over maximizing comment count.
+
+---
+
+# Scope Review
 
 Verify:
 
-* business goal is implemented
-* user stories are implemented
-* acceptance criteria are implemented
+* approved scope was respected
+* out-of-scope features were not accidentally added
+* unrelated refactors were minimized
+* architecture stayed proportional
 
-### Correctness
+Flag unnecessary scope expansion when meaningful.
+
+---
+
+# Correctness Review
+
+Check:
+
+* logic bugs
+* incorrect UX behavior
+* runtime issues
+* integration issues
+* failure-path behavior
+* state-management issues
+* edge cases appropriate to feature complexity
+
+Prioritize meaningful workflow correctness.
+
+Avoid speculative edge-case hunting for tiny features.
+
+---
+
+# Code Quality Review
 
 Check:
 
-* bugs
-* logic issues
-* edge cases
-* error handling
-
-### Code Quality
-
-Check:
-* complexity
-* duplication 
-* naming
 * readability
 * maintainability
-* extensability - was there any better strtcture that would have made code more extensinle
-                  eg, add new type of ...
-                  is it likely that in the future we will need to extend it  ? 
-                  will it be easy in the future to refactore or is it the time  
+* naming
+* duplication
+* complexity
+* cohesion
+* consistency with project patterns
 
-### Next.js Review
+Prefer:
+
+* explicit readable logic
+* focused responsibilities
+* maintainable structure
+* understandable flow
+
+Avoid:
+
+* clever-but-hard-to-maintain solutions
+* unnecessary abstractions
+* architecture inflation
+* premature optimization
+
+---
+
+# Architecture Review
 
 Check:
-
-* App Router practices
-* client vs server usage
-* route handlers
-* component boundaries
-* unnecessary client components
-
-keep in mind i am new to next js , so be sure to explain in details what is not right
-
-### Architecture Review
-
-Check:
-
 
 * responsibility boundaries
-* unnecessary layers (note: i am good with reposiotry layer)
-* missing layers when justified
-* consistency with existing project patterns
-* in case in the future we will need to scale it to many users , will it be simple 
-  (how many users \ request will reach that point)
+* consistency with project patterns
+* unnecessary layers
+* implementation proportionality
+* maintainability risks
 
-### Test Review
+Only discuss missing layers when clearly justified.
+
+Prefer:
+
+* simple architecture
+* gradual architecture evolution
+* consistency with existing systems
+
+Avoid:
+
+* speculative scaling
+* future-system redesign
+* architecture purity arguments
+
+---
+
+# Runtime / Operational Review
+
+If relevant, review:
+
+* client/server boundaries
+* SSR/runtime behavior
+* deployment/runtime behavior
+* persistence behavior
+* authentication/session handling
+* concurrency/async behavior
+* API contract behavior
+
+Only discuss operational concerns when justified by the feature.
+
+Avoid operational over-analysis for small features.
+
+---
+
+# Next.js Review
+
+If relevant, review:
+
+* App Router usage
+* client vs server components
+* route handlers
+* hydration concerns
+* server/client boundaries
+* unnecessary client components
+* unnecessary server complexity
+
+For learning projects:
+
+* explain findings clearly
+* prefer beginner-friendly explanations
+
+Keep concise.
+
+---
+
+# Testing Review
 
 Check:
 
-* test strategy was followed
-* important user stories are covered
+* important behavior is protected
 * acceptance criteria are covered
-* edge cases are covered appropriately
+* regression risks are addressed
+* testing depth matches feature complexity
+* testing strategy remains proportional
 
-### Security Review
+Do NOT require excessive coverage.
 
-Check:
+Do NOT recommend unnecessary Playwright/E2E.
+
+Prefer meaningful regression protection.
+
+---
+
+# Security Review
+
+If relevant, check:
 
 * secrets
 * unsafe logging
@@ -117,8 +390,15 @@ Check:
 * authentication
 * authorization
 * trust boundaries
+* sensitive-data exposure
 
-### Performance Review
+Keep proportional to project scope.
+
+Avoid enterprise-grade security audits for tiny features.
+
+---
+
+# Performance Review
 
 Check:
 
@@ -127,130 +407,308 @@ Check:
 * expensive operations
 * unnecessary API calls
 * oversized client components
+* wasteful processing
 
-### Simplicity Review
+Only flag meaningful concerns.
 
-Check for:
+Avoid premature optimization discussions.
 
-* over-engineering
-* premature optimization
-* unnecessary abstractions
-* unnecessary patterns
+---
 
-  Those re importan to keep code simple, make it readable and simpler to maintain
-  
+# Review Prioritization
 
+Prioritize findings by:
 
+* correctness impact
+* regression risk
+* user impact
+* operational/runtime impact
+* maintainability impact
 
-## Output Format
+Avoid flooding the review with low-value comments.
 
-### Overall Assessment
+Prefer concise high-signal review feedback.
 
-Provide:
+---
 
-* readiness level
-* overall quality
-* confidence level
+# Output Rules
 
-Example:
+Output MUST scale according to feature complexity.
 
-* Feature mostly ready for PR
-* One blocking issue found
-* Two optional improvements suggested
+Do NOT generate identical review depth for all features.
 
-### Feature Coverage
+Prefer concise practical review output.
 
-Verify:
+Avoid:
 
-#### Business Goal
+* giant review reports
+* repetitive prose
+* speculative redesign discussion
+* low-value nitpicks
 
-Implemented?
-Yes / No
+Prefer reviews understandable in a few minutes.
 
-Comments:
+---
 
-#### User Stories
+# Tiny Feature Output
 
-For each user story:
+Required sections:
 
-* implemented?
-* comments
+* Overall Assessment
+* Scope Validation
+* Blocking Issues
+* Non-Blocking Suggestions
+* Recommended Next Step
 
-#### Acceptance Criteria
+Expected output:
+
+* concise
+* practical
+* focused
+
+Architecture discussion should usually be minimal.
+
+---
+
+# Medium Feature Output
+
+Required sections:
+
+* Overall Assessment
+* Acceptance Criteria Coverage
+* Blocking Issues
+* Non-Blocking Suggestions
+* Testing Findings
+* Architecture Findings
+* Regression Risks
+* Recommended Next Step
+
+Expected output:
+
+* balanced engineering feedback
+* meaningful maintainability discussion
+
+---
+
+# Large / High-Risk Feature Output
+
+Required sections:
+
+* Overall Assessment
+* Acceptance Criteria Coverage
+* Blocking Issues
+* Non-Blocking Suggestions
+* Architecture Findings
+* Runtime / Operational Findings
+* Security Findings
+* Performance Findings
+* Testing Findings
+* Regression Risks
+* Risks Still Uncovered
+* Recommended Next Step
+
+Expected output:
+
+* broader system awareness
+* operational clarity
+* stronger regression awareness
+
+Avoid speculative redesign discussions.
+
+---
+
+# Output Format
+
+## Overall Assessment
+
+Examples:
+
+* ready for verification
+* mostly ready
+* one blocking issue found
+* several maintainability concerns
+
+Keep concise and actionable.
+
+---
+
+## Acceptance Criteria Coverage
 
 For each acceptance criterion:
 
 * implemented?
 * comments
 
-### Security Findings
+Focus on meaningful behavior gaps only.
 
-List concerns.
+---
 
-### Blocking Issues
+## Scope Validation
+
+Verify:
+
+* approved scope respected
+* no accidental scope expansion
+* unrelated refactors minimized
+
+---
+
+## Blocking Issues
 
 For each issue:
 
-File:
+* severity
+* file
+* method/function
+* issue
+* why it matters
+* suggested fix
 
-Function / Method:
+Only include meaningful blockers.
 
-Issue:
+Avoid speculative blockers.
 
-Why It Matters:
+---
 
-Suggested Fix:
+## Non-Blocking Suggestions
 
-### Non-Blocking Suggestions
+Optional improvements only.
 
-Optional improvements.
+Keep focused and practical.
 
-### Missing Tests
+Avoid style-only nitpicks unless meaningful.
+
+---
+
+## Testing Findings
 
 Review:
 
-#### Manual End-to-End Coverage
+* missing important coverage
+* regression risks
+* edge-case gaps
+* incorrect testing strategy
 
-Missing scenarios?
+Recommend:
 
-#### Automated E2E Coverage
+```text id="4ty2i9"
+/add-tests
+```
 
-Missing scenarios?
+when testing truth should evolve.
 
-#### Unit Test Coverage
+Avoid demanding unnecessary coverage.
 
-Missing scenarios?
+---
 
-#### Component Test Coverage
+## Architecture Findings
 
-Missing scenarios?
+List meaningful:
 
+* maintainability risks
+* responsibility issues
+* unnecessary complexity
+* missing boundaries when justified
 
-### Performance Findings
+Avoid speculative redesign.
 
-List concerns.
+---
 
-### Maintainability Findings
+## Runtime / Operational Findings
 
-List concerns.
-
-### Learning Notes
-
-Explain:
-
-* why each important issue matters
-* which engineering concept is involved
-* beginner-friendly explanation
-
-### Recommended Next Step
+List meaningful concerns only.
 
 Examples:
 
-* Fix blocking issues
-* Add missing tests
-* Ready for regression testing
-* Ready for PR
+* SSR/runtime issues
+* deployment concerns
+* async/concurrency concerns
+* persistence/runtime inconsistencies
 
-### Suggested Commit Message
+Only include justified concerns.
 
-Provide one commit message if appropriate.
+---
+
+## Security Findings
+
+List important concerns only.
+
+Avoid speculative enterprise-grade security lists.
+
+---
+
+## Performance Findings
+
+List meaningful concerns only.
+
+Avoid premature optimization suggestions.
+
+---
+
+## Regression Risks
+
+Explain:
+
+* what could accidentally break
+* what deserves additional verification
+
+Focus on meaningful workflow risks.
+
+---
+
+## Learning Notes
+
+For learning projects only.
+
+Explain briefly:
+
+* why important findings matter
+* engineering concepts involved
+* why some suggestions are intentionally NOT recommended
+
+Keep concise and practical.
+
+---
+
+## Recommended Next Step
+
+Examples:
+
+* `/fix-bug`
+* `/add-tests`
+* `/update-plan`
+* ready for verification
+* ready for PR
+
+---
+
+## Context Used
+
+Examples:
+
+* `.claude/CLAUDE.md`
+* `.claude/AGENTS.md`
+* `.claude/PROJECT.md`
+
+---
+
+# Important Principles
+
+Prefer:
+
+* focused practical review
+* correctness
+* maintainability
+* readability
+* regression awareness
+* proportional review depth
+* practical engineering feedback
+
+Avoid:
+
+* architecture perfectionism
+* speculative redesign
+* overengineering
+* review bureaucracy
+* low-value nitpicks
+* rewriting stable code without strong justification
