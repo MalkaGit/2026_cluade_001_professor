@@ -7,8 +7,8 @@
  *   Overlays the bottom portion of the professor image inside ProfessorDevice.
  *
  * What it draws:
- *   Row 1 (control): ON/OFF | SET | LVL<n>
- *   Rows 2–5 (numpad): 7 8 9 + / 4 5 6 - / 1 2 3 × / 0 . GO ÷
+ *   Row 1 (control): ON/OFF | LVL<n>
+ *   Rows 2–5 (numpad): 7 8 9 + / 4 5 6 - / 1 2 3 × / 0 DEL GO ÷
  *
  * Used by: ProfessorDevice
  * Uses:    ProfessorButton

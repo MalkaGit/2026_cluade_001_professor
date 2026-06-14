@@ -1,227 +1,630 @@
+<!-- 4b -->
 # Plan Feature
 
 Use this command before implementing a feature.
 
-## Goal
+Do NOT use for:
 
-Understand the feature before implementation.
+* tiny isolated bug fixes
+* trivial text changes
+* obvious low-risk tweaks
+
+---
+
+# Goal
+
+Create the INITIAL implementation direction for the feature.
 
 Focus on:
 
-* business value
-* user value
-* design
-* testing
-* risks
+* business/user value
+* visible user behavior
+* implementation feasibility
+* practical architecture
+* meaningful risks
+* fast verification
 
-Do not edit files.
+Prefer:
+
+* concise planning
+* practical engineering
+* visible progress
+* implementation-oriented thinking
+* existing project patterns
+
+Avoid:
+
+* overengineering
+* speculative architecture
+* giant design discussions
+* verbose planning
+* unnecessary process
+
+Do NOT:
+
+* edit files
+* implement code
+* create full QA documentation
+* redesign unrelated systems
 
 Wait for approval before implementation.
 
-## Instructions
+---
+
+# Documentation Persistence
+
+Follow documentation persistence and naming rules defined in:
+
+```text
+.claude/CLAUDE.md
+```
+
+Claude MUST immediately create or update the appropriate markdown documentation files during this workflow step.
+
+Documentation files become part of the CURRENT SOURCE OF TRUTH for the workflow.
+
+---
+
+# Inputs
+
+Prefer:
+
+* small clear requirements
+* one milestone/slice at a time
+* explicit scope
+* explicit out-of-scope items
+* practical implementation goals
+
+Avoid giant multi-feature planning when possible.
+
+---
+
+# Feature Complexity
+
+Classify feature complexity BEFORE planning.
+
+Complexity determines:
+
+* planning depth
+* output size
+* architecture detail
+* testing discussion
+* operational awareness
+
+---
+
+## Tiny Feature
+
+Examples:
+
+* CSS tweak
+* text change
+* tiny validation
+* small UI adjustment
+* tiny bug fix
+
+Characteristics:
+
+* isolated change
+* low regression risk
+* minimal architecture impact
+* straightforward verification
+
+Expected behavior:
+
+* SHORT output
+* implementation-oriented
+* minimal architecture discussion
+* lightweight testing ideas
+
+Avoid unnecessary sections.
+
+Avoid mini design documents.
+
+---
+
+## Medium Feature
+
+Examples:
+
+* CRUD workflow
+* form workflow
+* API integration
+* frontend/backend feature
+* stateful component flow
+
+Characteristics:
+
+* multiple moving parts
+* moderate UX impact
+* moderate regression risk
+
+Expected behavior:
+
+* balanced engineering detail
+* practical architecture direction
+* meaningful verification thinking
+
+---
+
+## Large / High-Risk Feature
+
+Examples:
+
+* authentication
+* payments
+* migrations
+* distributed systems
+* major persistence changes
+* multi-page workflows
+
+Characteristics:
+
+* broad system impact
+* operational/runtime implications
+* higher regression risk
+* integration complexity
+
+Expected behavior:
+
+* deeper engineering analysis
+* operational awareness
+* stronger regression thinking
+* rollout/risk awareness
+
+Still avoid speculative overengineering.
+
+---
+
+# Core Planning Rules
 
 Given a feature request:
 
-1. Restate the business goal.
-2. Identify the users/personas.
-3. Define user stories.
-4. Define acceptance criteria (eg, end to end success path test case )
-5. Propose a high-level design.
-6. Propose frontend changes.
-7. Propose backend/API changes if relevant.
-8. Propose database changes if relevant.
-9. Propose files to create or modify.
-10. Propose major methods/functions.
-11. Define a test strategy before implementation.
-12. Identify risks and missing requirements.
-13. Define out-of-scope items.
-14. Ask questions if requirements are unclear.
-15. Do not implement.
-16. Wait for approval.
+1. Restate the feature goal
+2. Classify feature complexity
+3. Generate output proportional to complexity
+4. Define scope
+5. Define out-of-scope items
+6. Define UX/runtime flow
+7. Define acceptance criteria
+8. Reuse existing project patterns first
+9. Introduce architecture only when justified
+10. Identify meaningful risks/open questions
+11. Propose INITIAL testing ideas
+12. Ask clarification questions if required
+13. Do NOT implement
+14. Wait for approval
 
-## Planning Depth
+Prefer implementation-oriented planning over theoretical design discussion.
 
-Use the same structure for all features.
+Prefer plans that lead to visible working software quickly.
 
-Small features:
+---
 
-* concise answers
+# Existing Project Patterns
 
-Medium features:
+Strongly prefer extending EXISTING:
 
-* normal detail
+* folder structure
+* architecture
+* naming conventions
+* testing patterns
+* runtime patterns
 
-Large or high-risk features:
+Avoid introducing new patterns unless clearly justified.
 
-* include additional detail for:
+Team consistency is more important than personal preference.
 
-  * API contracts
-  * database changes
-  * security
-  * performance
-  * scale
+---
 
-## Output Format
+# Stop Conditions
 
-### Feature Summary
+Stop and ask when:
 
-Short description of the feature.
+* requirements are unclear
+* product behavior is ambiguous
+* scope expands significantly
+* architecture must significantly change
+* authentication/security concerns emerge
+* persistence behavior is unclear
+* deployment/runtime assumptions are unclear
+* implementation feasibility is uncertain
 
-### Business Goal
+Do NOT invent critical business behavior.
 
-Why are we building this feature?
+---
 
-### Users / Personas
+# Planning Principles
 
-Who uses this feature?
+Prefer:
 
-### User Stories
+* incremental delivery
+* visible progress
+* practical engineering
+* maintainable simplicity
+* focused scope
+* high-signal communication
+* smallest useful solution
+
+Avoid:
+
+* architecture inflation
+* speculative flexibility
+* giant plans
+* process-heavy planning
+* verbose documentation
+* premature abstraction
+
+Scale process according to actual feature complexity and risk.
+
+---
+
+# Architecture Guidance
+
+Use the SIMPLEST architecture that safely solves the problem.
+
+Prefer:
+
+* localized complexity
+* gradual architecture evolution
+* focused responsibilities
+* maintainable simplicity
+
+Avoid:
+
+* unnecessary layers
+* speculative scalability
+* premature abstraction
+* architecture-first development
+
+---
+
+## Simple UI Feature
+
+```text
+UI
+↓
+Local State
+```
+
+Use when:
+
+* state is local
+* logic is simple
+* persistence is not needed
+
+Avoid unnecessary layers.
+
+---
+
+## API Feature
+
+```text
+UI
+↓
+API Route
+↓
+Business Logic
+```
+
+Use when:
+
+* backend behavior exists
+* validation/business rules matter
+* API behavior matters
+
+---
+
+## Persistence Feature
+
+```text
+UI
+↓
+API Route
+↓
+Service
+↓
+Repository
+↓
+Database
+```
+
+Use ONLY when persistence/business complexity becomes meaningful.
+
+Do NOT introduce layers prematurely.
+
+---
+
+# Runtime / Operational Awareness
+
+Consider runtime/deployment behavior ONLY when relevant.
 
 Examples:
 
-* As a student, I want to answer math questions so I can practice multiplication.
-* As an admin, I want to see usage statistics.
+* client/server boundaries
+* persistence behavior
+* async/background processing
+* deployment/runtime implications
+* caching/state synchronization
+* concurrency behavior
+* authentication/session handling
 
-### Acceptance Criteria
+Avoid unnecessary operational complexity.
 
-List measurable success criteria.
+---
 
-### High-Level Design (HLD)
+# Async / Background Processing
 
-#### Frontend
-
-For each major UI component:
-
-* file
-* component
-* main methods/functions
-* responsibility
-
-#### Backend / API
-
-If relevant:
-
-* route
-* file
-* method/function
-* responsibility
-
-#### Database
-
-If relevant:
-
-* tables
-* columns
-* indexes
-* migrations
-
-Otherwise:
-
-None.
-
-#### End-to-End Flow
-
-Describe the runtime flow.
-
-For each step include:
-
-* file
-* method/function
-* purpose
-
-### Files To Create
-
-List files and purpose.
-
-### Files To Update
-
-List files and purpose.
-
-### Major Methods / Functions
-
-For each:
-
-* file
-* method/function
-* purpose
-
-### Test Strategy
-
-#### Manual End-to-End Sanity Test
-
-Main happy path.
-
-Include:
-
-* who runs it
-* when it runs
-* steps (how to run it)
-* expected result
-
-#### Automated End-to-End Tests
-
-Main user stories.
+Introduce async/background processing only when justified.
 
 Examples:
 
-* successful flow
-* validation failure
-* error handling
+### Database-backed Worker
 
-For each test specify:
+```text
+Producer writes pending tasks to database.
+Worker polls/reads tasks and processes them asynchronously.
+```
 
-* who runs it
-* how to run it
-* when it runs 
-* expected result
+### Queue-based Processing
 
-#### Unit Tests
+```text
+Producer publishes messages to queue/topic.
+Workers consume messages asynchronously.
+```
 
-Business logic, validation, utilities, services.
+Examples:
 
-For each test specify:
+* AWS SQS + Lambda/ECS worker
+* Google Pub/Sub + Cloud Run/Functions
+* Azure Service Bus + Azure Functions
+* RabbitMQ
+* Kafka
 
-* who runs it
-* gow to run it
-* when it runs
-* expected result
+Avoid distributed-system complexity too early.
 
-#### Component Tests
+---
 
-Only if useful.
+# Output Rules
 
-#### Regression Impact
+Output MUST scale according to feature complexity.
 
-Which existing flows might break?
+Do NOT generate identical verbosity for all features.
 
-### Risks / Questions
+Prefer concise high-signal planning.
 
-List:
+Avoid:
 
-* risks
-* assumptions
-* missing requirements
+* giant outputs
+* architecture essays
+* repetitive prose
+* speculative future-system design
 
-### Out Of Scope
+Prefer plans understandable in a few minutes.
 
-What will not be implemented in this version.
+---
 
-### Optional Considerations
+# Tiny Feature Output
 
-Only include when relevant:
+Required sections:
 
-* API Contract
-* Security
-* Performance / Latency
-* Scale
-* Accessibility / Mobile
-* Observability
-* Deployment
+* Feature Summary
+* Goal
+* Scope
+* UX Flow
+* Acceptance Criteria
+* Minimal Testing Ideas
+* Next Step
 
-### Next Step
+Optional only if truly relevant:
 
-Recommend:
+* Architecture
+* Risks
+* Files likely to change
+
+Expected output:
+
+* short
+* practical
+* implementation-focused
+
+---
+
+# Medium Feature Output
+
+Required sections:
+
+* Feature Summary
+* Goal
+* Scope
+* Out Of Scope
+* UX Flow
+* Acceptance Criteria
+* High-Level Architecture
+* Risks / Open Questions
+* Initial Testing Ideas
+* Next Step
+
+Expected output:
+
+* balanced detail
+* maintainable implementation focus
+* practical engineering direction
+
+---
+
+# Large / High-Risk Feature Output
+
+Required sections:
+
+* Feature Summary
+* Goal
+* Scope
+* Out Of Scope
+* UX Flow
+* Acceptance Criteria
+* High-Level Architecture
+* Integration Boundaries
+* Persistence Considerations
+* Deployment / Rollout Considerations
+* Risks / Open Questions
+* Initial Testing Ideas
+* Regression Concerns
+* Operational Concerns
+* Next Step
+
+Expected output:
+
+* deeper engineering analysis
+* operational awareness
+* broader regression thinking
+
+Avoid speculative overengineering.
+
+---
+
+# Section Guidance
+
+## UX Flow
+
+Prefer:
+
+* runtime behavior
+* user-visible behavior
+* important interactions
+* important state transitions
+
+Avoid low-value implementation detail.
+
+---
+
+## Acceptance Criteria
+
+Prefer:
+
+* measurable user-visible behavior
+* meaningful workflows
+* important edge cases
+
+Avoid implementation detail.
+
+---
+
+## High-Level Architecture
+
+Only include meaningful architecture.
+
+Examples:
+
+### Frontend
+
+* pages
+* components
+* state ownership
+* responsibilities
+
+### Backend / API
+
+* API routes
+* validation direction
+* integration boundaries
+
+### Persistence
+
+* storage direction
+* data ownership
+
+Keep proportional to actual complexity.
+
+---
+
+## Risks / Open Questions
+
+List only meaningful:
+
+* unclear requirements
+* integration concerns
+* runtime concerns
+* persistence concerns
+* operational concerns
+
+Avoid speculative fear lists.
+
+---
+
+## Initial Testing Ideas
+
+Keep proportional to feature complexity.
+
+Examples:
+
+* manual sanity ideas
+* regression considerations
+* possible unit-test targets
+* Playwright relevance
+* edge-case validation ideas
+
+This is NOT:
+
+* full QA documentation
+* full regression matrix
+* final testing truth
+
+Testing strategy evolves later during:
+
+```text
+/add-tests
+```
+
+---
+
+# Learning Notes
+
+For learning projects, explain briefly:
+
+* important architecture decisions
+* why patterns were chosen
+* why abstractions were avoided
+
+Keep concise and practical.
+
+---
+
+# Recommended Next Step
+
+Recommend one of:
 
 * approve plan
 * clarify requirements
+* split into smaller milestone
 * proceed to `/create-feature`
+* revisit architecture assumptions
+
+---
+
+## Context Used
+
+Examples:
+
+* `.claude/CLAUDE.md`
+* `.claude/AGENTS.md`
+* `.claude/PROJECT.md`
+
+---
+
+# Important Principle
+
+Prefer:
+
+* visible progress
+* practical engineering
+* iterative delivery
+* maintainable simplicity
+* smallest useful solution
+
+Avoid:
+
+* process-heavy planning
+* speculative scaling
+* architecture perfectionism
+* unnecessary complexity

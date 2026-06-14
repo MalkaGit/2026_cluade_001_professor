@@ -24,8 +24,8 @@ interface ProfessorScreenProps {
 
 // ── Font size helper ───────────────────────────────────────────────────────────
 
-/** Picks a Tailwind text-size class based on the longest line. */
-function getFontClass(lines: string[]): string {
+/** Picks a Tailwind text-size class based on the longest line. Exported for unit testing. */
+export function getFontClass(lines: string[]): string {
   const maxLen = Math.max(...lines.map((l) => l.length));
   if (maxLen <= 12) return 'text-2xl';
   if (maxLen <= 18) return 'text-lg';
